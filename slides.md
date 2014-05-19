@@ -99,8 +99,7 @@ var module = require('./module', function(module) {
 
 -- image
 
-## RequireJS
-
+<img src="img/requirejs-logo.png" alt="RequireJS logo" style="max-width: 240px;">
 
 --
 
@@ -132,25 +131,77 @@ var module = require('./module', function(module) {
 });
 ```
 
---
+-- image
 
-## Component
+<img src="img/browserify-logo.png" alt="Browserify logo" style="max-width: 400px;">
 
---
+```bash
+npm install -g browserify
+npm install lodash
+browserify main.js -o bundle.js
+```
 
-## Browserify
+* Module loader & build system that lets you write CommonJS style modules for the browser.
+* A lot of NodeJS modules (including core ones) will "Just Work"
+* Has plugins called "transforms" that make it even more magical
 
---
+-- image
 
-## Grunt
+<img src="img/bower-logo.png" alt="Bower logo" style="max-width: 240px;">
 
---
+```bash
+npm install -g bower
+bower install jquery#1.10
+```
 
-## Gulp
+* A client side package manager
+* Uses `bower.json` and also leverages github
 
---
+-- image
 
-## Gulp + Browserify = Awesome
+![component logo](img/component-logo.jpg)
+
+```bash
+npm install -g component
+component install component/emitter
+component build
+```
+
+* A client side package manager, module loader & build system
+* Lets you write CommonJS style modules for the browser.
+* Components are self contained with minimal styling (supports css)
+* Uses `component.json` which leverages github
+
+-- image
+
+<img src="img/grunt-logo.png" alt="Grunt logo" style="max-height: 240px; max-width: 240px;">
+
+```bash
+npm install -g grunt-cli
+grunt Gruntfile.js
+```
+
+* Build system with tons of plugins
+* More "config-file-like"
+
+-- image
+
+<img src="img/gulp-logo.png" alt="Gulp logo" style="max-height: 240px; max-width: 240px;">
+
+```bash
+npm install -g gulp
+gulp Gulpfile.js
+```
+
+* Build system also with tons of plugins
+* More "code-like" & crazy fast
+* Uses streams to pipe your files from one rule to another
+
+-- image
+
+<img src="img/combined.png" alt="Awesome Sauce">
+
+<img src="img/omg.gif" alt="OMG" style="max-height: 240px; max-width: 240px; margin-top: -120px;">
 
 --
 
