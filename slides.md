@@ -1,35 +1,16 @@
-title: YYCjs Slides
+title: Optimizing Your JS Workflow
 output: index.html
 theme: theme
 controls: false
 logo: theme/logo.png
 
---
+-- title
 
-# YYC.js Presents:
+# Optimizing Your JS Workflow
 
-## An Epic Slide Template
-
-### That totally kicks some ass
-
-#### Kind of like Chuck Norris
-
-##### And Jackie Chan
-
-Maybe even Chris Rock
-
---
+-- title
 
 # Brought to you by
-
--- presenter
-
-![David Luecke](http://gravatar.com/avatar/a14850281f19396480bdba4aab2d52ef?s=200)
-
-## David Luecke
-
-* [<i class="fa fa-github"></i> daffl](https://github.com/daffl)
-* [<i class="fa fa-twitter"></i> @daffl](http://twitter.com/daffl)
 
 -- presenter
 
@@ -57,12 +38,122 @@ Maybe even Chris Rock
 
 # Last Month
 
-* Something awesome
-* More awesomeness
+* Intro to [NodeJS](http://nodejs.org) & [npm](http://npmjs.org)
+* Package.json and commonJS modules
+* NodeJS "hello world" http server
+* Creating a file server and then making it stream
+* Intro to [express](http://expressjs.com) & [socket.io](http://socket.io)
+* Creating a real-time photo sharing app using [Feathers](http://feathersjs.com)
+
+--
+
+## Modules
+
+```javascript
+var APP = (function() {
+  // Do stuff
+  var privateVariable = 'Hello ',
+    sayHi = function(name) {
+      return privateVariable + name;
+    };
+
+  // Return API
+  return {
+    init : function() { /* ... */ },
+    hi : sayHi
+  }
+})();
+
+console.log(APP.sayHi('David'));
+```
+
+--
+
+## Asynchronous Module Definition
+
+```javascript
+// say_hi.js
+define(function() {
+  var privateVariable = 'Hello ';
+  return {
+    sayHi : function(name) {
+              return privateVariable + name;
+          }
+  }
+});
+
+// module.js
+define(['./say_hi'], function(hiSayer) {
+  return {
+    result : hiSayer.sayHi('David'),
+    sayHi : hiSayer
+  }
+});
+
+// app.js
+var module = require('./module', function(module) {
+  module.sayHi('You'); // Hello You
+  module.result; // -> Hello David
+});
+```
+
+-- image
+
+## RequireJS
+
+
+--
+
+## AMD -> CommonJS
+
+```javascript
+// say_hi.js
+define(function(module, exports, require) {
+  var privateVariable = 'Hello ';
+  return {
+    sayHi : function(name) {
+              return privateVariable + name;
+          }
+  }
+});
+
+// module.js
+define(['./say_hi'], function(hiSayer) {
+  return {
+    result : hiSayer.sayHi('David'),
+    sayHi : hiSayer
+  }
+});
+
+// app.js
+var module = require('./module', function(module) {
+  module.sayHi('You'); // Hello You
+  module.result; // -> Hello David
+});
+```
+
+--
+
+## Component
+
+--
+
+## Browserify
+
+--
+
+## Grunt
+
+--
+
+## Gulp
+
+--
+
+## Gulp + Browserify = Awesome
 
 --
 
 # Next Month
 
-* Something awesome
-* More awesomeness
+* Why use a framework?

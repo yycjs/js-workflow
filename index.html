@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <title>YYCjs Slides</title>
+  <title>Optimizing Your JS Workflow</title>
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,900,700,500' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="theme/font-awesome.css">
   <style type="text/css">
@@ -405,6 +405,7 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 100;
   color: #333333;
+  background: #FFFFFF;
 }
 
 h1 {
@@ -425,6 +426,14 @@ h3 {
 
 p {
   font-weight: 100;
+}
+
+h1, h2, h3, h4, h5, p, ul {
+  margin: 10px 0;
+}
+
+ul {
+  padding: 20px 0 20px 60px;
 }
 
 .progress-bar {
@@ -471,6 +480,16 @@ p {
   padding: 30px;
 }
 
+.title .slide-content {
+  display: table;
+}
+
+.title h1 {
+  display: table-cell; 
+  vertical-align: middle;
+  z-index: 10;
+}
+
 .presenter img {
   height: 200px;
   width: 200px;
@@ -506,6 +525,10 @@ p {
   padding: 0 10px;
 }
 
+.sponsors h1 {
+  margin: 20px 0 40px 0;
+}
+
 .sponsors p {
   float: left;
   text-align: center;
@@ -517,6 +540,13 @@ p {
   width: 100%;
   max-width: 240px;
 }
+
+.image p > img {
+  max-width: 600px;
+  max-height: 400px;
+  margin: 20px auto;
+  display: table-cell;
+}
   </style>
 </head>
 <body>
@@ -524,29 +554,15 @@ p {
     <div class="progress-bar"></div>
   </div>
 
-  <div class="slide" id="slide-1">
-    <section class="slide-content"><h1 id="yyc-js-presents-">YYC.js Presents:</h1>
-<h2 id="an-epic-slide-template">An Epic Slide Template</h2>
-<h3 id="that-totally-kicks-some-ass">That totally kicks some ass</h3>
-<h4 id="kind-of-like-chuck-norris">Kind of like Chuck Norris</h4>
-<h5 id="and-jackie-chan">And Jackie Chan</h5>
-<p>Maybe even Chris Rock</p>
+  <div class="slide  title" id="slide-1">
+    <section class="slide-content"><h1 id="optimizing-your-js-workflow">Optimizing Your JS Workflow</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-2">
+  <div class="slide hidden  title" id="slide-2">
     <section class="slide-content"><h1 id="brought-to-you-by">Brought to you by</h1>
 </section>
   </div>
   <div class="slide hidden  presenter" id="slide-3">
-    <section class="slide-content"><p><img src="http://gravatar.com/avatar/a14850281f19396480bdba4aab2d52ef?s=200" alt="David Luecke"></p>
-<h2 id="david-luecke">David Luecke</h2>
-<ul>
-<li><a href="https://github.com/daffl"><i class="fa fa-github"></i> daffl</a></li>
-<li><a href="http://twitter.com/daffl"><i class="fa fa-twitter"></i> @daffl</a></li>
-</ul>
-</section>
-  </div>
-  <div class="slide hidden  presenter" id="slide-4">
     <section class="slide-content"><p><img src="http://gravatar.com/avatar/23aba778a7daae99348aeb0728cf4aec?s=200" alt="Eric Kryski"></p>
 <h2 id="eric-kryski">Eric Kryski</h2>
 <ul>
@@ -556,7 +572,7 @@ p {
 </ul>
 </section>
   </div>
-  <div class="slide hidden  sponsors" id="slide-5">
+  <div class="slide hidden  sponsors" id="slide-4">
     <section class="slide-content"><h1 id="our-sponsors">Our Sponsors</h1>
 <p><img src="img/sponsors/assembly_logo.png" alt="Assembly"></p>
 <p><img src="img/sponsors/village_brewery_logo.png" alt="Village Brewery"></p>
@@ -564,19 +580,119 @@ p {
 <p><img src="img/sponsors/petrofeed_logo.png" alt="PetroFeed"></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-6">
+  <div class="slide hidden" id="slide-5">
     <section class="slide-content"><h1 id="last-month">Last Month</h1>
 <ul>
-<li>Something awesome</li>
-<li>More awesomeness</li>
+<li>Intro to <a href="http://nodejs.org">NodeJS</a> &amp; <a href="http://npmjs.org">npm</a></li>
+<li>Package.json and commonJS modules</li>
+<li>NodeJS &quot;hello world&quot; http server</li>
+<li>Creating a file server and then making it stream</li>
+<li>Intro to <a href="http://expressjs.com">express</a> &amp; <a href="http://socket.io">socket.io</a></li>
+<li>Creating a real-time photo sharing app using <a href="http://feathersjs.com">Feathers</a></li>
 </ul>
 </section>
   </div>
+  <div class="slide hidden" id="slide-6">
+    <section class="slide-content"><h2 id="modules">Modules</h2>
+<pre><code class="lang-javascript"><span class="keyword">var</span> APP = (<span class="keyword">function</span>() {
+  <span class="comment">// Do stuff</span>
+  <span class="keyword">var</span> privateVariable = <span class="string">'Hello '</span>,
+    sayHi = <span class="keyword">function</span>(name) {
+      <span class="keyword">return</span> privateVariable + name;
+    };
+
+  <span class="comment">// Return API</span>
+  <span class="keyword">return</span> {
+    init : <span class="keyword">function</span>() { <span class="comment">/* ... */</span> },
+    hi : sayHi
+  }
+})();
+
+console.log(APP.sayHi(<span class="string">'David'</span>));</code></pre>
+</section>
+  </div>
   <div class="slide hidden" id="slide-7">
+    <section class="slide-content"><h2 id="asynchronous-module-definition">Asynchronous Module Definition</h2>
+<pre><code class="lang-javascript"><span class="comment">// say_hi.js</span>
+define(<span class="keyword">function</span>() {
+  <span class="keyword">var</span> privateVariable = <span class="string">'Hello '</span>;
+  <span class="keyword">return</span> {
+    sayHi : <span class="keyword">function</span>(name) {
+              <span class="keyword">return</span> privateVariable + name;
+          }
+  }
+});
+
+<span class="comment">// module.js</span>
+define([<span class="string">'./say_hi'</span>], <span class="keyword">function</span>(hiSayer) {
+  <span class="keyword">return</span> {
+    result : hiSayer.sayHi(<span class="string">'David'</span>),
+    sayHi : hiSayer
+  }
+});
+
+<span class="comment">// app.js</span>
+<span class="keyword">var</span> module = require(<span class="string">'./module'</span>, <span class="keyword">function</span>(module) {
+  module.sayHi(<span class="string">'You'</span>); <span class="comment">// Hello You</span>
+  module.result; <span class="comment">// -&gt; Hello David</span>
+});</code></pre>
+</section>
+  </div>
+  <div class="slide hidden  image" id="slide-8">
+    <section class="slide-content"><h2 id="requirejs">RequireJS</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><h2 id="amd-commonjs">AMD -&gt; CommonJS</h2>
+<pre><code class="lang-javascript"><span class="comment">// say_hi.js</span>
+define(<span class="keyword">function</span>(module, exports, require) {
+  <span class="keyword">var</span> privateVariable = <span class="string">'Hello '</span>;
+  <span class="keyword">return</span> {
+    sayHi : <span class="keyword">function</span>(name) {
+              <span class="keyword">return</span> privateVariable + name;
+          }
+  }
+});
+
+<span class="comment">// module.js</span>
+define([<span class="string">'./say_hi'</span>], <span class="keyword">function</span>(hiSayer) {
+  <span class="keyword">return</span> {
+    result : hiSayer.sayHi(<span class="string">'David'</span>),
+    sayHi : hiSayer
+  }
+});
+
+<span class="comment">// app.js</span>
+<span class="keyword">var</span> module = require(<span class="string">'./module'</span>, <span class="keyword">function</span>(module) {
+  module.sayHi(<span class="string">'You'</span>); <span class="comment">// Hello You</span>
+  module.result; <span class="comment">// -&gt; Hello David</span>
+});</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h2 id="component">Component</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h2 id="browserify">Browserify</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h2 id="grunt">Grunt</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h2 id="gulp">Gulp</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h2 id="gulp-browserify-awesome">Gulp + Browserify = Awesome</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-15">
     <section class="slide-content"><h1 id="next-month">Next Month</h1>
 <ul>
-<li>Something awesome</li>
-<li>More awesomeness</li>
+<li>Why use a framework?</li>
 </ul>
 </section>
   </div>
