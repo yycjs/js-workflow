@@ -596,76 +596,78 @@ ul {
     <section class="slide-content"><h2 id="modules">Modules</h2>
 <pre><code class="lang-javascript"><span class="keyword">var</span> APP = (<span class="keyword">function</span>() {
   <span class="comment">// Do stuff</span>
-  <span class="keyword">var</span> privateVariable = <span class="string">'Hello '</span>,
-    sayHi = <span class="keyword">function</span>(name) {
-      <span class="keyword">return</span> privateVariable + name;
+  <span class="keyword">var</span> privateVariable = <span class="string">'HELLO '</span>;
+  <span class="keyword">var</span> shout = <span class="keyword">function</span>(name) {
+      <span class="keyword">return</span> privateVariable + name.toUpperCase() + <span class="string">'!'</span>;
     };
 
   <span class="comment">// Return API</span>
   <span class="keyword">return</span> {
     init : <span class="keyword">function</span>() { <span class="comment">/* ... */</span> },
-    hi : sayHi
+    yell : shout
   }
 })();
 
-console.log(APP.sayHi(<span class="string">'David'</span>));</code></pre>
+console.log(APP.yell(<span class="string">'David'</span>));</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-7">
     <section class="slide-content"><h2 id="asynchronous-module-definition">Asynchronous Module Definition</h2>
-<pre><code class="lang-javascript"><span class="comment">// say_hi.js</span>
+<pre><code class="lang-javascript"><span class="comment">// shouter.js</span>
 define(<span class="keyword">function</span>() {
-  <span class="keyword">var</span> privateVariable = <span class="string">'Hello '</span>;
+  <span class="keyword">var</span> privateVariable = <span class="string">'HELLO '</span>;
   <span class="keyword">return</span> {
-    sayHi : <span class="keyword">function</span>(name) {
-              <span class="keyword">return</span> privateVariable + name;
-          }
-  }
+    shout: <span class="keyword">function</span>(name) {
+      <span class="keyword">return</span> privateVariable + name.toUpperCase() + <span class="string">'!'</span>;
+    }
+  };
 });
 
 <span class="comment">// module.js</span>
-define([<span class="string">'./say_hi'</span>], <span class="keyword">function</span>(hiSayer) {
+define([<span class="string">'./shouter'</span>], <span class="keyword">function</span>(Shouter) {
   <span class="keyword">return</span> {
-    result : hiSayer.sayHi(<span class="string">'David'</span>),
-    sayHi : hiSayer
-  }
+    result : Shouter.shout(<span class="string">'David'</span>),
+    yeller : Shouter
+  };
 });
 
 <span class="comment">// app.js</span>
 <span class="keyword">var</span> module = require(<span class="string">'./module'</span>, <span class="keyword">function</span>(module) {
-  module.sayHi(<span class="string">'You'</span>); <span class="comment">// Hello You</span>
-  module.result; <span class="comment">// -&gt; Hello David</span>
+  module.yeller(<span class="string">'You!'</span>); <span class="comment">// HELLO YOU!</span>
+  module.result; <span class="comment">// -&gt; HELLO DAVID!</span>
 });</code></pre>
 </section>
   </div>
   <div class="slide hidden  image" id="slide-8">
     <section class="slide-content"><p><img src="img/requirejs-logo.png" alt="RequireJS logo" style="max-width: 240px;"></p>
+<ul>
+<li>A module loader and build system</li>
+</ul>
 </section>
   </div>
   <div class="slide hidden" id="slide-9">
-    <section class="slide-content"><h2 id="amd-commonjs">AMD -&gt; CommonJS</h2>
-<pre><code class="lang-javascript"><span class="comment">// say_hi.js</span>
-define(<span class="keyword">function</span>(module, exports, require) {
-  <span class="keyword">var</span> privateVariable = <span class="string">'Hello '</span>;
-  <span class="keyword">return</span> {
-    sayHi : <span class="keyword">function</span>(name) {
-              <span class="keyword">return</span> privateVariable + name;
-          }
-  }
+    <section class="slide-content"><h2 id="amd-requirejs-commonjs">AMD + RequireJS -&gt; CommonJS</h2>
+<pre><code class="lang-javascript"><span class="comment">// shouter.js</span>
+define(<span class="keyword">function</span>(require, exports, module) {
+  <span class="keyword">var</span> privateVariable = <span class="string">'HELLO '</span>;
+  module.exports = {
+    shout: <span class="keyword">function</span>(name) {
+      <span class="keyword">return</span> privateVariable + name.toUpperCase() + <span class="string">'!'</span>;
+    }
+  };
 });
-
 <span class="comment">// module.js</span>
-define([<span class="string">'./say_hi'</span>], <span class="keyword">function</span>(hiSayer) {
-  <span class="keyword">return</span> {
-    result : hiSayer.sayHi(<span class="string">'David'</span>),
-    sayHi : hiSayer
+define(<span class="keyword">function</span>(require, exports, module) {
+  <span class="keyword">var</span> Shouter = require(<span class="string">'shouter'</span>)
+  module.exports = {
+    result : Shouter.shout(<span class="string">'David'</span>),
+    yeller : Shouter
   }
 });
-
 <span class="comment">// app.js</span>
 <span class="keyword">var</span> module = require(<span class="string">'./module'</span>, <span class="keyword">function</span>(module) {
-  module.sayHi(<span class="string">'You'</span>); <span class="comment">// Hello You</span>
-  module.result; <span class="comment">// -&gt; Hello David</span>
+  module.yeller(<span class="string">'You!'</span>); <span class="comment">// HELLO YOU!</span>
+  module.result; <span class="comment">// HELLO DAVID!</span>
 });</code></pre>
 </section>
   </div>

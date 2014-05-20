@@ -52,19 +52,19 @@ logo: theme/logo.png
 ```javascript
 var APP = (function() {
   // Do stuff
-  var privateVariable = 'Hello ',
-    sayHi = function(name) {
-      return privateVariable + name;
+  var privateVariable = 'HELLO ';
+  var shout = function(name) {
+      return privateVariable + name.toUpperCase() + '!';
     };
 
   // Return API
   return {
     init : function() { /* ... */ },
-    hi : sayHi
+    yell : shout
   }
 })();
 
-console.log(APP.sayHi('David'));
+console.log(APP.yell('David'));
 ```
 
 --
@@ -72,28 +72,28 @@ console.log(APP.sayHi('David'));
 ## Asynchronous Module Definition
 
 ```javascript
-// say_hi.js
+// shouter.js
 define(function() {
-  var privateVariable = 'Hello ';
+  var privateVariable = 'HELLO ';
   return {
-    sayHi : function(name) {
-              return privateVariable + name;
-          }
-  }
+    shout: function(name) {
+      return privateVariable + name.toUpperCase() + '!';
+    }
+  };
 });
 
 // module.js
-define(['./say_hi'], function(hiSayer) {
+define(['./shouter'], function(Shouter) {
   return {
-    result : hiSayer.sayHi('David'),
-    sayHi : hiSayer
-  }
+    result : Shouter.shout('David'),
+    yeller : Shouter
+  };
 });
 
 // app.js
 var module = require('./module', function(module) {
-  module.sayHi('You'); // Hello You
-  module.result; // -> Hello David
+  module.yeller('You!'); // HELLO YOU!
+  module.result; // -> HELLO DAVID!
 });
 ```
 
@@ -101,33 +101,34 @@ var module = require('./module', function(module) {
 
 <img src="img/requirejs-logo.png" alt="RequireJS logo" style="max-width: 240px;">
 
+* A module loader and build system
+
 --
 
-## AMD -> CommonJS
+## AMD + RequireJS -> CommonJS
 
 ```javascript
-// say_hi.js
-define(function(module, exports, require) {
-  var privateVariable = 'Hello ';
-  return {
-    sayHi : function(name) {
-              return privateVariable + name;
-          }
-  }
+// shouter.js
+define(function(require, exports, module) {
+  var privateVariable = 'HELLO ';
+  module.exports = {
+    shout: function(name) {
+      return privateVariable + name.toUpperCase() + '!';
+    }
+  };
 });
-
 // module.js
-define(['./say_hi'], function(hiSayer) {
-  return {
-    result : hiSayer.sayHi('David'),
-    sayHi : hiSayer
+define(function(require, exports, module) {
+  var Shouter = require('shouter')
+  module.exports = {
+    result : Shouter.shout('David'),
+    yeller : Shouter
   }
 });
-
 // app.js
 var module = require('./module', function(module) {
-  module.sayHi('You'); // Hello You
-  module.result; // -> Hello David
+  module.yeller('You!'); // HELLO YOU!
+  module.result; // HELLO DAVID!
 });
 ```
 
