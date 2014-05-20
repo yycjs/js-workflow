@@ -101,7 +101,8 @@ var module = require('./module', function(module) {
 
 <img src="img/requirejs-logo.png" alt="RequireJS logo" style="max-width: 240px;">
 
-* A module loader and build system
+* A module loader and build tool
+* Originally built for AMD but supports CommonJS
 
 --
 
