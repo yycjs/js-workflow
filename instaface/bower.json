@@ -1,0 +1,23 @@
+{
+  "name": "instaface",
+  "version": "0.0.0",
+  "homepage": "https://github.com/yycjs/instaface",
+  "authors": [
+    "Eric Kryski <kryski@petrofeed.com>"
+  ],
+  "description": "instaface",
+  "main": "main.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "*"
+  }
+}
